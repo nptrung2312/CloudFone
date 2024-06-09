@@ -3,6 +3,7 @@ const express = require('express');
 	const mysql = require('mysql');
 	
 	const app = express();
+    app.use(cors());
 
 	const db = mysql.createConnection({
 		host: "localhost",
@@ -11,9 +12,9 @@ const express = require('express');
 		database: "test"
 	});
 
-	app.get("/student", (req, res) =>{
+	app.get("/student", async (req, res) =>{
 		const sql = "SELECT * FROM users";
-		db.query(sql, (err, data) => {
+		await db.query(sql, (err, data) => {
 			if(err) return res.json("ERROR");
             return res.json(data);
 		})
