@@ -1,19 +1,30 @@
-.login-wrapper{
+.login-wrapper {
     width: 100%;
     height: 100vh;
     display: flex;
     overflow: hidden;
     flex-direction: row;
     background-color: #B3E1FA;
-    .login-content-left{
+
+    .login-content-left {
         width: 40%;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .text-error {
+            position: absolute;
+            left: 0;
+            bottom: -24px;
+            color: rgb(139, 6, 6);
+            font-weight: 500;
+        }
     }
-    .login-content-right{
+
+    .login-content-right {
         width: 60%;
-        img{
+
+        img {
             height: auto;
             width: 100%;
             object-fit: cover;
