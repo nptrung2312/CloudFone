@@ -19,6 +19,20 @@
             color: rgb(139, 6, 6);
             font-weight: 500;
         }
+
+        .text-error-public {
+            left: 50%;
+            bottom: 105px;
+            width: 100%;
+            transform: translateX(-50%);
+        }
+
+        .hidden-password {
+            position: absolute;
+            right: 0;
+            bottom: 5px;
+            cursor: pointer;
+        }
     }
 
     .login-content-right {

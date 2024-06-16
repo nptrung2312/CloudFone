@@ -1,28 +1,24 @@
-
-
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
   font-family: ShopeeDisplay-Regular;
-  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Regular.ttf'); 
+  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Regular.ttf');
 }
 
 @font-face {
   font-family: ShopeeDisplay-Medium;
-  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Medium.ttf'); 
+  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Medium.ttf');
 }
 
 @font-face {
   font-family: ShopeeDisplay-Bold;
-  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Bold.ttf'); 
+  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-Bold.ttf');
 }
 
 @font-face {
   font-family: ShopeeDisplay-SemiBold;
-  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-SemiBold.ttf'); 
+  src: url('../fonts/ShopeeDisplay/ShopeeDisplay-SemiBold.ttf');
 }
 
 
@@ -32,61 +28,68 @@
 [ RESTYLE TAG ]*/
 
 * {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-body, html {
-	height: 100%;
-	font-family: ShopeeDisplay-Regular, sans-serif;
+body,
+html {
+  height: 100%;
+  font-family: ShopeeDisplay-Regular, sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: ShopeeDisplay-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
+  font-family: ShopeeDisplay-Regular;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
 }
 
 a:focus {
-	outline: none !important;
+  outline: none !important;
 }
 
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
   color: #a64bf4;
 }
 
 /*---------------------------------------------*/
-h1,h2,h3,h4,h5,h6 {
-	margin: 0px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
 }
 
 p {
-	font-family: ShopeeDisplay-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
+  font-family: ShopeeDisplay-Regular;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
 }
 
-ul, li {
-	margin: 0px;
-	list-style-type: none;
+ul,
+li {
+  margin: 0px;
+  list-style-type: none;
 }
 
 
 /*---------------------------------------------*/
 input {
-	outline: none;
-	border: none;
+  outline: none;
+  border: none;
 }
 
 textarea {
@@ -94,43 +97,88 @@ textarea {
   border: none;
 }
 
-textarea:focus, input:focus {
+textarea:focus,
+input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder {
+  color: transparent;
+}
 
-input::-webkit-input-placeholder { color: #adadad;}
-input:-moz-placeholder { color: #adadad;}
-input::-moz-placeholder { color: #adadad;}
-input:-ms-input-placeholder { color: #adadad;}
+input:focus::-moz-placeholder {
+  color: transparent;
+}
 
-textarea::-webkit-input-placeholder { color: #adadad;}
-textarea:-moz-placeholder { color: #adadad;}
-textarea::-moz-placeholder { color: #adadad;}
-textarea:-ms-input-placeholder { color: #adadad;}
+input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus:-moz-placeholder {
+  color: transparent;
+}
+
+textarea:focus::-moz-placeholder {
+  color: transparent;
+}
+
+textarea:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+input::-webkit-input-placeholder {
+  color: #adadad;
+}
+
+input:-moz-placeholder {
+  color: #adadad;
+}
+
+input::-moz-placeholder {
+  color: #adadad;
+}
+
+input:-ms-input-placeholder {
+  color: #adadad;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #adadad;
+}
+
+textarea:-moz-placeholder {
+  color: #adadad;
+}
+
+textarea::-moz-placeholder {
+  color: #adadad;
+}
+
+textarea:-ms-input-placeholder {
+  color: #adadad;
+}
 
 /*---------------------------------------------*/
 button {
-	outline: none !important;
-	border: none;
-	background: transparent;
+  outline: none !important;
+  border: none;
+  background: transparent;
 }
 
 button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 iframe {
-	border: none !important;
+  border: none !important;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -150,9 +198,17 @@ iframe {
   text-transform: uppercase;
 }
 
-.bg1 {background-color: #3b5998}
-.bg2 {background-color: #1da1f2}
-.bg3 {background-color: #ea4335}
+.bg1 {
+  background-color: #3b5998
+}
+
+.bg2 {
+  background-color: #1da1f2
+}
+
+.bg3 {
+  background-color: #ea4335
+}
 
 
 
@@ -164,7 +220,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -211,9 +267,9 @@ iframe {
   content: '';
   position: absolute;
   height: 20px;
-    width: 20px;
-    top: 20px;
-    left: 35px;
+  width: 20px;
+  top: 20px;
+  left: 35px;
   border-radius: 50%;
   background-color: #B3E1FA;
   border: solid 2px #6e7491;
@@ -263,7 +319,7 @@ iframe {
   width: 100%;
   height: 45px;
   background: transparent;
-  padding: 0 7px 0 43px;
+  padding: 0 20px 0 43px;
 }
 
 
@@ -315,19 +371,19 @@ iframe {
 }
 
 
-.input100:focus + .focus-input100::before {
+.input100:focus+.focus-input100::before {
   width: 100%;
 }
 
-.has-val.input100 + .focus-input100::before {
+.has-val.input100+.focus-input100::before {
   width: 100%;
 }
 
-.input100:focus + .focus-input100::after {
+.input100:focus+.focus-input100::after {
   color: #00dbde;
 }
 
-.has-val.input100 + .focus-input100::after {
+.has-val.input100+.focus-input100::after {
   color: #00dbde;
 }
 
@@ -411,7 +467,7 @@ iframe {
   margin-bottom: 24px;
 }
 
-.text-right{
+.text-right {
   text-align: right;
   margin-bottom: 24px;
   margin-top: -20px;
@@ -510,4 +566,4 @@ iframe {
     padding-left: 15px;
     padding-right: 15px;
   }
-} 
+}
