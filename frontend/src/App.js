@@ -1,8 +1,8 @@
 import './App.css';
-import Login from './Login';
-import Home from './Home';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { publicRoutes } from './routes';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import MasterLayout from './component/layout';
 
 function App() {
   const [account, setAccount] = useState({});
@@ -20,8 +20,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Login />}></Route>
-        <Route path='/home' element={<Home />}></Route>
+        {publicRoutes.map((route, index) => {
+          const Layout = route.layout || MasterLayout
+          const Page = route.component;
+          return <Route key={index} path={route.path} element={
+            <Layout><Page /></Layout>
+          } />
+        })}
       </Routes>
     </div>
   );
