@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../assets/scss/Sidebar.scss';
 
 function Sidebar() {
+
     return (
         <aside>
-            <h2>Sidebar</h2>
+            <div className="text">Dashboard Sidebar</div>
         </aside>
     );
 }

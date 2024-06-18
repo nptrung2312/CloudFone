@@ -4,8 +4,6 @@ import Validation from './LoginValidation';
 import axios from 'axios';
 import { withNavigate } from "./withNavigate";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 class Login extends Component {
 	constructor(props) {
 		// Hàm tạo

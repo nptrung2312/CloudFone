@@ -38,11 +38,8 @@ const Menu = () => {
             {isOpen && (
                 <PopperWrapper referenceElement={buttonRef.current}>
                     <div ref={menuRef} className="menu">
-                        <ul>
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
+                        <button className='info-user'><span><i class="fa fa-address-book-o" aria-hidden="true"></i></span> Hồ sơ</button>
+                        <button className='logout-user'><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>Đăng xuất</button>
                     </div>
                 </PopperWrapper>
             )}
