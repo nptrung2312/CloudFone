@@ -126,7 +126,7 @@ function Header() {
                 <div className='sidepanel-wrapper'>
                     <ContentSidePanel />
                     <Tippy content="Đóng" placement="left">
-                        <button className='close-sidepanel' onClick={() => setOpenPanel(false)}><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button className='close-sidepanel' onClick={() => setOpenPanel(false)}><i className="fa fa-times" aria-hidden="true"></i></button>
                     </Tippy>
                 </div>
             </SlidingPanel>
