@@ -1,8 +1,9 @@
 import './App.css';
-import { publicRoutes } from './routes';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MasterLayout from './component/layout';
+import { publicRoutes, protectedRoutes } from './routes';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
   const [account, setAccount] = useState({});
@@ -21,11 +22,22 @@ function App() {
     <div className="App">
       <Routes>
         {publicRoutes.map((route, index) => {
-          const Layout = route.layout || MasterLayout
           const Page = route.component;
-          return <Route key={index} path={route.path} element={
-            <Layout><Page /></Layout>
-          } />
+          return <Route key={index} path={route.path} element={<Page />} />;
+        })}
+        {protectedRoutes.map((route, index) => {
+          const Layout = route.layout || MasterLayout;
+          const Page = route.component;
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <ProtectedRoute>
+                  <Layout><Page /></Layout>
+                </ProtectedRoute>}
+            />
+          );
         })}
       </Routes>
     </div>
