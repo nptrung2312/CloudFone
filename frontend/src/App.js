@@ -25,6 +25,8 @@ function App() {
           const Page = route.component;
           return <Route key={index} path={route.path} element={<Page />} />;
         })}
+      </Routes>
+      <Routes>
         {protectedRoutes.map((route, index) => {
           const Layout = route.layout || MasterLayout;
           const Page = route.component;

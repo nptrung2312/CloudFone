@@ -1,0 +1,130 @@
+.sidebar-content {
+    .bar-menu {
+        position: absolute;
+        top: 25px;
+        left: 15px;
+        cursor: pointer;
+
+        .design-bar {
+            position: relative;
+            height: 25px;
+            width: 30px;
+
+            span {
+                transition: all .3s;
+                position: absolute;
+                display: inline-block;
+                background: rgba(255, 255, 255, .8);
+                height: 3px;
+                border-radius: 50px;
+
+                left: 0;
+
+                &.line-1 {
+                    top: 0;
+                    width: 100%;
+                }
+
+                &.line-2 {
+                    top: 44%;
+                    width: 60%;
+                }
+
+                &.line-3 {
+                    bottom: 0;
+                    width: 40%;
+                }
+
+            }
+
+            &:hover {
+                span {
+                    width: 100%;
+                    background: #FFF;
+                }
+            }
+        }
+    }
+
+    .main-menu {
+        background: rgba(255, 255, 255, .1);
+        border-radius: 0 20px 0 0;
+        padding: 20px 14px;
+
+        &.w-20 {
+            width: 4rem;
+        }
+    }
+
+    .menu-sidebar {
+        text-align: left;
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            position: relative;
+            padding: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+
+            &:hover {
+                transition: all .3s;
+                border-radius: 5px;
+                background: rgba(255, 255, 255, 0.4);
+            }
+
+            .icon {
+                display: inline-block;
+                width: 30px;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .text {
+                margin-left: 5px;
+            }
+
+            p {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 100%;
+                text-align: right;
+
+                .icon-sub-menu {
+                    display: inline-block;
+                    color: rgba(255, 255, 255, .8);
+                }
+            }
+        }
+
+        .sub-menu {
+            position: relative;
+            padding-left: 25px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 4px;
+                height: 100%;
+                width: 1px;
+                background: rgba(255, 255, 255, .8);
+            }
+
+            .sub-menu-item {
+                cursor: pointer;
+                font-size: 14px;
+                padding: 5px;
+                margin-bottom: 15px;
+
+                &:hover {
+                    transition: all .3s;
+                    border-radius: 5px;
+                    background: rgba(255, 255, 255, 0.4);
+                }
+            }
+        }
+    }
+}

@@ -4,11 +4,11 @@
     height: 100vh;
     overflow: hidden;
 
-    .bg-layout {
+    .bg-layout-1 {
         position: absolute;
         inset: 0;
         z-index: -2;
-        transform: rotate(22deg) scale(1.25);
+        transform: rotate(22deg) scale(1.75);
 
         &:after {
             content: '';
