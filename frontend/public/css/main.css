@@ -27,6 +27,11 @@
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
+.toast-container {
+  z-index: 16000 !important;
+  /* Giá trị z-index tùy chỉnh */
+}
+
 * {
   margin: 0px;
   padding: 0px;

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import '../../assets/scss/Header.scss';
@@ -11,6 +12,7 @@ import '../../assets/scss/SidePanel.scss';
 import ContentSidePanel from '../elements/ContentSidePanel';
 
 function Header() {
+    const session = JSON.parse(sessionStorage.getItem('account'));
     const logo = require('./images/logo.png');
     const avatar = require('./images/user.jpg');
     const navigate = useNavigate();
@@ -67,7 +69,30 @@ function Header() {
         navigate('/');
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission
+        // Your form submission logic here if needed
+    };
+
     const [openPanel, setOpenPanel] = useState(false);
+
+    const [dataUser, setDataUser] = useState(null);
+
+    const fetchUserData = () => {
+        axios.post('http://localhost:8080/api/getInfoUser', session.user)
+            .then(res => {
+                if (res.data.user) {
+                    setDataUser(res.data.user);
+                }
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        fetchUserData(); // Chỉ tải 1 lần khi render
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <header>
             <div className='header-wrapper'>
@@ -75,7 +100,7 @@ function Header() {
                     <img className='logo' src={logo} alt='MobifoneService-CanTho' />
                 </div>
                 <div className='form-seach-header'>
-                    <form action=''>
+                    <form onSubmit={handleSubmit}>
                         <input className='search-input' type='text' placeholder='Nội dung cần tìm...' />
                         <Tippy content="Tìm kiếm" placement="right">
                             <button className='search-button'>
@@ -124,7 +149,7 @@ function Header() {
                 backdropClicked={() => setOpenPanel(false)}
             >
                 <div className='sidepanel-wrapper'>
-                    <ContentSidePanel />
+                    <ContentSidePanel userDataChild={dataUser} />
                     <Tippy content="Đóng" placement="left">
                         <button className='close-sidepanel' onClick={() => setOpenPanel(false)}><i className="fa fa-times" aria-hidden="true"></i></button>
                     </Tippy>

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import MasterLayout from './component/layout';
 import { publicRoutes, protectedRoutes } from './routes';
 import ProtectedRoute from './routes/ProtectedRoute';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [account, setAccount] = useState({});
@@ -12,12 +14,12 @@ function App() {
   useEffect(() => {
     let session = sessionStorage.getItem('account');
     if (session) {
-      setAccount(account);
+      setAccount(prevAccount => session);
       navigate('/home');
     } else {
       navigate('/');
     }
-  }, []);
+  }, [navigate]);
   return (
     <div className="App">
       <Routes>
@@ -27,12 +29,12 @@ function App() {
         })}
       </Routes>
       <Routes>
-        {protectedRoutes.map((route, index) => {
+        {protectedRoutes.map((route, indexProTect) => {
           const Layout = route.layout || MasterLayout;
           const Page = route.component;
           return (
             <Route
-              key={index}
+              key={indexProTect}
               path={route.path}
               element={
                 <ProtectedRoute>
@@ -42,6 +44,17 @@ function App() {
           );
         })}
       </Routes>
+      <ToastContainer
+        className="toast-container"
+        toastClassName="toast-item"
+        bodyClassName="toast-item-body"
+        autoClose={3000}
+        hideProgressBar={false}
+        pauseOnHover={true}
+        pauseOnFocusLoss={true}
+        closeOnClick={false}
+        draggable={false}
+      />
     </div>
   );
 }

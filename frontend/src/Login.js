@@ -3,6 +3,7 @@ import './assets/scss/Login.scss';
 import Validation from './LoginValidation';
 import axios from 'axios';
 import { withNavigate } from "./withNavigate";
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
@@ -86,9 +87,9 @@ class Login extends Component {
 							</div>
 							{this.state.errors.public && <span className='text-error text-error-public'>{this.state.errors.public}</span>}
 							<div className="text-right p-t-8 p-b-31">
-								<a href="#">
+								<Link href="#">
 									Quên mật khẩu?
-								</a>
+								</Link>
 							</div>
 
 							<div className="container-login100-form-btn">

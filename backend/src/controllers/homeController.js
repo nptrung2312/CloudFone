@@ -26,7 +26,35 @@ let handleLogin = async (req, res) => {
     });
 };
 
+let handleGetInfoUser = async (req, res) => {
+    let infoUser = await userService.handleGetInfo(req.body);
+
+    return res.status(200).json({
+        user: infoUser.user,
+    });
+}
+let handleUpdateInfoUser = async (req, res) => {
+    let inFoUser = await userService.handleUpdateInfoUser(req.body);
+
+    return res.status(200).json({
+        errCode: inFoUser.errCode,
+        message: inFoUser.message,
+        user: inFoUser.user,
+    });
+}
+
+let handleChangePassword = async (req, res) => {
+    let dataPassWord = await userService.handleUpdatePassUser(req.body);
+    return res.status(200).json({
+        code: dataPassWord.code,
+        message: dataPassWord.message
+    });
+}
+
 module.exports = {
     getHomePage: getHomePage,
-    handleLogin: handleLogin
+    handleLogin: handleLogin,
+    handleUpdateInfoUser: handleUpdateInfoUser,
+    handleGetInfoUser: handleGetInfoUser,
+    handleChangePassword: handleChangePassword,
 }

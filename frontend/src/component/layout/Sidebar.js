@@ -28,13 +28,13 @@ function Sidebar() {
             <div className={`main-menu h-screen p-5 pt-8 ${openMenu ? "w-20" : "w-72"} duration-300 relative`}>
                 <ul className='menu-sidebar pt-2'>
                     {Menu.map((item, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             <Tippy content={item.title} placement="right">
                                 <li key={index} className='menu-item'>
                                     <span className='icon'><i className={`fa ${item.icon}`} aria-hidden="true"></i></span>
                                     <span className={`text ${openMenu && "hidden"} duration-300`}>{item.title}</span>
 
-                                    {item.subMenu && !openMenu && (<p onClick={() => setOpenSubMenu(!openSubMenu)}><span className={`icon-sub-menu duration-300 ${openSubMenu && "rotate-180"}`} ><i class="fa fa-sort-desc" aria-hidden="true"></i></span></p>)}
+                                    {item.subMenu && !openMenu && (<p onClick={() => setOpenSubMenu(!openSubMenu)}><span className={`icon-sub-menu duration-300 ${openSubMenu && "rotate-180"}`} ><i className="fa fa-sort-desc" aria-hidden="true"></i></span></p>)}
 
                                 </li>
                             </Tippy>
@@ -47,7 +47,7 @@ function Sidebar() {
                                     </ul>
                                 )
                             }
-                        </>
+                        </React.Fragment>
                     ))}
                 </ul>
             </div>

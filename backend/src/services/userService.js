@@ -24,7 +24,7 @@ let handleUserLogin = (email, password) => {
       let isExist = await checkUserEmail(email);
       if (isExist) {
         let user = await db.User.findOne({
-          attributes: ["email", "roleId", "password"],
+          attributes: ["id", "lastName", "firstName", "address", "phonenumber", "positionId", "email", "roleId", "password"],
           where: { email: email },
           raw: true,
         });
@@ -33,7 +33,7 @@ let handleUserLogin = (email, password) => {
           if (check) {
             userData.errCode = 0;
             userData.errMessage = "Oke";
-            delete user.password;
+            // delete user.password;
             userData.user = user;
           } else {
             userData.errCode = 1;
@@ -73,7 +73,101 @@ let checkUserEmail = (userEmail) => {
   });
 };
 
+let handleGetInfo = (infoUser) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let user = await db.User.findOne({
+        // attributes: ['id', 'firstName', 'lastName', 'positionId', 'roleId', 'email', 'phonenumber', 'address'],
+        where: {
+          id: infoUser.id,
+        },
+      });
+      resolve({
+        user: user.get({ plain: true }),
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+let handleUpdateInfoUser = (inFoUser) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let user = await db.User.findOne({
+        attributes: ['id', 'firstName', 'lastName', 'positionId', 'roleId', 'email', 'phonenumber', 'address'],
+        where: {
+          id: inFoUser.id,
+        },
+      });
+
+      if (user) {
+        Object.assign(user, {
+          firstName: inFoUser.firstName,
+          lastName: inFoUser.lastName,
+          positionId: inFoUser.position,
+          roleId: inFoUser.company,
+          email: inFoUser.email,
+          phonenumber: inFoUser.phone,
+          address: inFoUser.address,
+        });
+
+        await user.save();
+        resolve({
+          errCode: 0,
+          message: "Cập nhật thông tin thành công!",
+          user: user.get({ plain: true })
+        });
+      } else {
+        resolve({
+          errCode: 1,
+          message: "Lỗi!",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+let handleUpdatePassUser = (dataPass) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let dataUpdatePass = {};
+      let getUser = await db.User.findOne({
+        where: {
+          id: dataPass.id,
+        },
+      })
+      let check = await bcrypt.compareSync(dataPass.currentPassword, getUser.password);
+      if (check) {
+        let hashPassWord = await bcrypt.hashSync(dataPass.newPassword, salt);
+        Object.assign(getUser, {
+          password: hashPassWord,
+        });
+
+        await getUser.save();
+
+        resolve({
+          code: 0,
+          message: "Cập nhật mật khẩu thành công!"
+        });
+      } else {
+        resolve({
+          code: 1,
+          message: "Mật khẩu không đúng!"
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   checkUserEmail: checkUserEmail,
+  handleGetInfo: handleGetInfo,
+  handleUpdateInfoUser: handleUpdateInfoUser,
+  handleUpdatePassUser: handleUpdatePassUser,
 };
