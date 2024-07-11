@@ -39,42 +39,7 @@
                 width: 290px;
                 border-radius: 50%;
                 cursor: pointer;
-
-                &:hover {
-                    background: #000;
-
-                    label {
-                        transition: all .2s;
-                        opacity: 1;
-                        height: 100%;
-                        width: 100%;
-                        color: rgb(82, 92, 105);
-                    }
-                }
-
-                label {
-                    display: flex;
-                    position: absolute;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    transform: translate(-50%, -50%);
-                    top: 50%;
-                    left: 50%;
-                    opacity: 0;
-                    height: 0;
-                    width: 0;
-                    background: #FFF;
-                    font-weight: 600;
-                    border-radius: 50%;
-
-                    b {
-                        &:hover {
-                            transition: all .3s;
-                            font-size: 17px;
-                        }
-                    }
-                }
+                background: #dae7f7;
 
                 img {
                     height: 100%;
@@ -128,61 +93,6 @@
             border-radius: 20px;
             padding: 10px;
             background: rgba(255, 255, 255, .2);
-
-            .title-info {
-                margin-bottom: 20px;
-            }
-
-            .form-group {
-                position: relative;
-
-                .hidden-password {
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
-                    font-size: 14px;
-                }
-            }
-
-            .input-text {
-                background: transparent;
-                border: 1px solid rgba(255, 255, 255, .2);
-                border-radius: 10px;
-                padding: 6px 10px;
-                font-size: 16px;
-                width: 100%;
-                margin-bottom: 20px;
-                color: #FFF;
-
-                &:focus {
-                    border: 1px solid rgba(255, 255, 255, .2) !important;
-                }
-            }
-
-            .submit-update-password {
-                width: 100%;
-                padding: 6px 10px;
-                font-size: 16px;
-                background: rgba(255, 255, 255, .2);
-                color: #FFF;
-                font-weight: 600;
-
-                &:hover {
-                    transition: all .3s;
-                    background: #FFF;
-                    color: rgb(82, 92, 105);
-                }
-            }
-
-            .message-error {
-                position: absolute;
-                color: #ff1d1d;
-                left: 50%;
-                bottom: 5px;
-                font-weight: 700;
-                width: 100%;
-                transform: translateX(-50%);
-            }
         }
     }
 }

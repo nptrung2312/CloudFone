@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import { SuccessIcon, ErrorIcon } from '../elements/ToastIcon';
 import ChangeImage from "./ChangeImage";
+import ChangePassword from "./ChangePassword";
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import '../../assets/scss/ContentSidePanel.scss';
@@ -54,35 +55,6 @@ function ContentSidePanel({ userDataChild }) {
         setFocusField(field); // Lưu tên field để focus
     };
     //-----------------------------------------------
-    // Xử lý hiển thị password
-    const [passwordVisibility, setPasswordVisibility] = useState({
-        currentPassword: true,
-        newPassword: true,
-        confirmPassword: true
-    });
-
-    const handleShowHidePassword = (pass) => {
-        setPasswordVisibility(prevState => ({
-            ...prevState,
-            [pass]: !prevState[pass]
-        }));
-    };
-    //---------------------------
-    // Hiển thị hành ảnh trước khi upload
-    const avatar = require('../layout/images/user.jpg');
-    const [selectedImage, setSelectedImage] = useState(avatar);
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-    //-----------------------
     // Cập nhật thông tin user
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -115,61 +87,13 @@ function ContentSidePanel({ userDataChild }) {
             })
     };
     //-------------------------------------------
-    // Xử lý đổi mật khẩu
-
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        if (newPassword && confirmPassword && newPassword !== confirmPassword) {
-            setMessage('Mật khẩu không trùng khớp!');
-        } else {
-            setMessage('');
-        }
-    }, [newPassword, confirmPassword]);
-
-    const handleChangePassword = async (e, id) => {
-        e.preventDefault();
-        if (message) {
-            return; // Nếu có thông báo lỗi, không cho phép submit
-        }
-
-        const dataPass = {
-            id,
-            currentPassword,
-            newPassword
-        }
-
-        axios.post('http://localhost:8080/api/changePassword', dataPass)
-            .then(res => {
-                console.log("res", res);
-                if (res.data.code === 0) {
-                    toast.success(res.data.message, { icon: <SuccessIcon /> });
-                } else {
-                    toast.error(res.data.message, { icon: <ErrorIcon /> });
-                }
-            })
-            .catch(() => {
-                toast.error("Đã xảy ra lỗi trong quá trình gửi yêu cầu!", { icon: <ErrorIcon /> });
-            })
-    }
-    //-------------------------------------------
     return (
         <div className="main-considepanel-wrapper">
             <h2 className="title-considepanel">{session.user["firstName"]} {session.user["lastName"]}</h2>
             <div className="content-considepanel">
                 <Tippy content="Đổi ảnh đại diện" placement="left" zIndex={16000}>
                     <div className="avatar-wrap">
-                        {/* <div className="content-avatar">
-                        <label htmlFor="input-upload"><b><i className="fa fa-upload" aria-hidden="true"></i> Tải ảnh lên</b></label>
-                        <img className="avatar-user" src={selectedImage} alt="avatar-user" />
-                        <input id="input-upload" type="file" accept="image/*" onChange={handleImageChange} hidden />
-                    </div> */}
-
                         <ChangeImage idUser={session.user["id"]} avatarUser={userDataChild["image"]} />
-
                     </div>
                 </Tippy>
                 <div className="info-user">
@@ -301,21 +225,7 @@ function ContentSidePanel({ userDataChild }) {
                     </div>
                 </div>
                 <div className="info-login">
-                    <h3 className="title-info">Đổi mật khẩu</h3>
-                    <div className="form-group">
-                        <input type={passwordVisibility.currentPassword ? 'password' : 'text'} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="input-text current-password" name="current-password" placeholder="Mật khẩu hiện tại" />
-                        <span className='hidden-password' onClick={() => handleShowHidePassword('currentPassword')}><i className={passwordVisibility.currentPassword ? 'fa fa-eye' : 'fa fa-eye-slash'} aria-hidden="true"></i></span>
-                    </div>
-                    <div className="form-group">
-                        <input type={passwordVisibility.newPassword ? 'password' : 'text'} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="input-text new-password" name="new-password" placeholder="Mật khẩu mới" />
-                        <span className='hidden-password' onClick={() => handleShowHidePassword('newPassword')}><i className={passwordVisibility.newPassword ? 'fa fa-eye' : 'fa fa-eye-slash'} aria-hidden="true"></i></span>
-                    </div>
-                    <div className="form-group">
-                        <input type={passwordVisibility.confirmPassword ? 'password' : 'text'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input-text re-password" name="re-password" placeholder="Nhập lại mật khẩu mới" />
-                        <span className='hidden-password' onClick={() => handleShowHidePassword('confirmPassword')}><i className={passwordVisibility.confirmPassword ? 'fa fa-eye' : 'fa fa-eye-slash'} aria-hidden="true"></i></span>
-                    </div>
-                    <button className="input-text submit-update-password" onClick={(e) => handleChangePassword(e, session.user["id"])}>Thay đổi</button>
-                    {message && <p className="message-error">{message}</p>}
+                    <ChangePassword idUser={session.user["id"]} />
                 </div>
             </div>
         </div>

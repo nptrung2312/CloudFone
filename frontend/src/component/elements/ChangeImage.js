@@ -91,7 +91,6 @@ const ChangeImage = ({ idUser, avatarUser }) => {
                 style={{ display: "none" }}
                 id="input-img"
                 onChange={handleImageChange}
-                label="Bấm vào đây để chọn ảnh"
             />
         </div>
     );
