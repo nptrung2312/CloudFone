@@ -18,5 +18,49 @@
             z-index: -1;
         }
     }
+}
 
+//Scrollbar CSS
+html *::-webkit-scrollbar {
+    border-radius: 100px;
+    width: 8px;
+    background: rgb(206, 206, 206);
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 100px;
+    width: 8px;
+    background: rgb(206, 206, 206);
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 100px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 100px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+button,
+input,
+[tabidex] {
+    outline: none;
+    border: none;
+}
+
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
 }

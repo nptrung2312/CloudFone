@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { SuccessIcon, ErrorIcon } from '../elements/ToastIcon';
+import ChangeImage from "./ChangeImage";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import '../../assets/scss/ContentSidePanel.scss';
 import '../../assets/scss/InputForm.scss';
 function ContentSidePanel({ userDataChild }) {
@@ -68,7 +71,6 @@ function ContentSidePanel({ userDataChild }) {
     // Hiển thị hành ảnh trước khi upload
     const avatar = require('../layout/images/user.jpg');
     const [selectedImage, setSelectedImage] = useState(avatar);
-
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -158,13 +160,18 @@ function ContentSidePanel({ userDataChild }) {
         <div className="main-considepanel-wrapper">
             <h2 className="title-considepanel">{session.user["firstName"]} {session.user["lastName"]}</h2>
             <div className="content-considepanel">
-                <div className="avatar-wrap">
-                    <div className="content-avatar">
+                <Tippy content="Đổi ảnh đại diện" placement="left" zIndex={16000}>
+                    <div className="avatar-wrap">
+                        {/* <div className="content-avatar">
                         <label htmlFor="input-upload"><b><i className="fa fa-upload" aria-hidden="true"></i> Tải ảnh lên</b></label>
                         <img className="avatar-user" src={selectedImage} alt="avatar-user" />
                         <input id="input-upload" type="file" accept="image/*" onChange={handleImageChange} hidden />
+                    </div> */}
+
+                        <ChangeImage idUser={session.user["id"]} avatarUser={userDataChild["image"]} />
+
                     </div>
-                </div>
+                </Tippy>
                 <div className="info-user">
                     <h3 className="title-info">Thông tin liên hệ</h3>
                     <div className="info">

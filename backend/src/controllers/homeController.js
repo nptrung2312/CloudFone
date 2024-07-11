@@ -51,10 +51,19 @@ let handleChangePassword = async (req, res) => {
     });
 }
 
+let handleSaveImage = async (req, res) => {
+    let dataUpdateAvatar = await userService.handleUpdateAvatar(req.body);
+    return res.status(200).json({
+        code: dataUpdateAvatar.code,
+        message: dataUpdateAvatar.message
+    });
+}
+
 module.exports = {
     getHomePage: getHomePage,
     handleLogin: handleLogin,
     handleUpdateInfoUser: handleUpdateInfoUser,
     handleGetInfoUser: handleGetInfoUser,
     handleChangePassword: handleChangePassword,
+    handleSaveImage: handleSaveImage,
 }

@@ -164,10 +164,37 @@ let handleUpdatePassUser = (dataPass) => {
   })
 }
 
+let handleUpdateAvatar = (dataImg) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      console.log(dataImg.img);
+      let getUser = await db.User.findOne({
+        where: {
+          id: dataImg.id,
+        },
+      })
+
+      Object.assign(getUser, {
+        image: dataImg.img,
+      });
+
+      await getUser.save();
+
+      resolve({
+        code: 0,
+        message: "Cập nhật ảnh thành công!"
+      });
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   checkUserEmail: checkUserEmail,
   handleGetInfo: handleGetInfo,
   handleUpdateInfoUser: handleUpdateInfoUser,
   handleUpdatePassUser: handleUpdatePassUser,
+  handleUpdateAvatar: handleUpdateAvatar,
 };

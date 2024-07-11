@@ -9,6 +9,7 @@ let initWebRoutes = (app) => { //Tạo các route tại đây truyền ứng d�
     router.post('/api/getInfoUser', homeController.handleGetInfoUser);
     router.post('/api/updateInfoUser', homeController.handleUpdateInfoUser);
     router.post('/api/changePassword', homeController.handleChangePassword);
+    router.post('/api/saveImage', homeController.handleSaveImage);
     router.post("/api/nptrung", (req, res) => {
         return res.send("NpTrung!");
     });
