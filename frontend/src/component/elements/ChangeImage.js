@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { updateAvatar } from '../../redux/userSlice'; // Đường dẫn đến file userSlice.js
 import { toast } from "react-toastify";
 import { SuccessIcon, ErrorIcon } from '../elements/ToastIcon';
 import { InputText } from "primereact/inputtext";
@@ -9,8 +11,8 @@ import Avatar from "react-avatar-edit";
 import '../../assets/scss/ChangeImage.scss';
 
 const ChangeImage = ({ idUser, avatarUser }) => {
-    let avatar = "";
-    avatarUser ? avatar = avatarUser : avatar = require('../layout/images/user.jpg');
+    const dispatch = useDispatch();
+    let avatar = avatarUser ? avatarUser : require('../layout/images/user.jpg');
     const [image] = useState(avatar);
     const [imageCrop, setImageCrop] = useState(false);
     const [src, setSrc] = useState(null);
@@ -36,6 +38,8 @@ const ChangeImage = ({ idUser, avatarUser }) => {
                     if (res.data.code === 0) {
                         setProfile([...profile, { pview }]);
                         setImageCrop(false);
+                        // Cập nhật avatar trong Redux store
+                        dispatch(updateAvatar(pview));
                         toast.success(res.data.message, { icon: <SuccessIcon /> });
                     } else {
                         toast.error(res.data.message, { icon: <ErrorIcon /> });

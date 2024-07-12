@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import '../../assets/scss/Header.scss';
@@ -10,13 +11,21 @@ import SlidingPanel from 'react-sliding-side-panel';
 import 'react-sliding-side-panel/lib/index.css';
 import '../../assets/scss/SidePanel.scss';
 import ContentSidePanel from '../elements/ContentSidePanel';
+import { fetchUser } from '../../redux/userSlice';
+import { updateStatusContentSidePanel } from '../../redux/userSlice';
 
 function Header() {
     const session = JSON.parse(sessionStorage.getItem('account'));
     const logo = require('./images/logo.png');
-    const avatar = require('./images/user.jpg');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const avatar = useSelector((state) => state.user.avatar);
+    const firstName = useSelector((state) => state.user.user.firstName);
+    const lastName = useSelector((state) => state.user.user.lastName);
+    const position = useSelector((state) => state.user.user.position);
+    const statusPanel = useSelector((state) => state.user.statusContentSidePanel);
+    const user = useSelector((state) => state.user.user);
     //handle date
     const [currentTime, setCurrentTime] = React.useState(new Date());
 
@@ -89,10 +98,25 @@ function Header() {
     }
 
     useEffect(() => {
+        if (user) {
+            setOpenPanel(statusPanel);
+        }
+    }, [user, statusPanel]);
+
+    useEffect(() => {
         fetchUserData(); // Chỉ tải 1 lần khi render
+        dispatch(fetchUser(session.user));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    let defaultAvatar = require('./images/user.jpg');
+    let defaultFullName = "Tên người dùng";
+    let defaultPosition = "Chức vụ";
+    if (dataUser) {
+        defaultAvatar = dataUser.image ?? dataUser.image;
+        defaultFullName = `${dataUser.firstName} ${dataUser.lastName}`;
+        defaultPosition = dataUser.positionId ?? dataUser.positionId;
+    }
     return (
         <header>
             <div className='header-wrapper'>
@@ -119,17 +143,17 @@ function Header() {
 
                 <div className='user-header' ref={buttonRef} onClick={toggleMenu}>
                     <div className='avatar'>
-                        <img className='img-user' src={avatar} alt='avatar-user' />
+                        <img className='img-user' src={avatar || defaultAvatar} alt='avatar-user' />
                     </div>
                     <div className='info'>
-                        <span className='position'>Chuyên viên kỹ thuật</span>
-                        <span className='name'>Nguyễn Phước Trung</span>
+                        <span className='position'>{position || defaultPosition}</span>
+                        <span className='name'>{(firstName + " " + lastName) || defaultFullName}</span>
                     </div>
                 </div>
                 {isOpen && (
                     <PopperWrapper referenceElement={buttonRef.current}>
                         <div ref={menuRef} className="menu-user">
-                            <button className='btn-user info-user' onClick={() => setOpenPanel(true)}>
+                            <button className='btn-user info-user' onClick={() => { setOpenPanel(true); dispatch(updateStatusContentSidePanel(true)); }}>
                                 <span className='icon'><i className="fa fa-address-book-o" aria-hidden="true"></i></span>
                                 <span className='text'>Hồ sơ</span>
                             </button>
@@ -149,7 +173,7 @@ function Header() {
                 backdropClicked={() => setOpenPanel(false)}
             >
                 <div className='sidepanel-wrapper'>
-                    <ContentSidePanel userDataChild={dataUser} />
+                    <ContentSidePanel userDataChild={user || dataUser} />
                     <Tippy content="Đóng" placement="left">
                         <button className='close-sidepanel' onClick={() => setOpenPanel(false)}><i className="fa fa-times" aria-hidden="true"></i></button>
                     </Tippy>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser, updateStatusContentSidePanel } from '../../redux/userSlice';
 import { SuccessIcon, ErrorIcon } from '../elements/ToastIcon';
 import ChangeImage from "./ChangeImage";
 import ChangePassword from "./ChangePassword";
@@ -13,6 +15,11 @@ function ContentSidePanel({ userDataChild }) {
     const session = JSON.parse(sessionStorage.getItem('account'));
     const [staticMode, setStaticMode] = useState(true);
     const [focusField, setFocusField] = useState(null);
+    const dispatch = useDispatch();
+
+    const firstName = useSelector((state) => state.user.user.firstName);
+    const lastName = useSelector((state) => state.user.user.lastName);
+
     // Tạo ref riêng cho mỗi input
     const inputRefs = {
         lastName: useRef(null),
@@ -77,6 +84,13 @@ function ContentSidePanel({ userDataChild }) {
                         phone: infoAfter.user["phonenumber"],
                         address: infoAfter.user["address"]
                     }))
+                    dispatch(updateUser({
+                        firstName: infoAfter.user.firstName,
+                        lastName: infoAfter.user.lastName,
+                        position: infoAfter.user.positionId
+                    }));
+                    dispatch(updateStatusContentSidePanel(false));
+                    setStaticMode(true);
                     toast.success("Cập nhật thông tin thành công!", { icon: <SuccessIcon /> });
                 } else {
                     toast.error("Đã xảy ra lỗi!", { icon: <ErrorIcon /> });
@@ -89,7 +103,7 @@ function ContentSidePanel({ userDataChild }) {
     //-------------------------------------------
     return (
         <div className="main-considepanel-wrapper">
-            <h2 className="title-considepanel">{session.user["firstName"]} {session.user["lastName"]}</h2>
+            <h2 className="title-considepanel">{(firstName + " " + lastName) || `${userData.firstName} ${userData.lastName}`}</h2>
             <div className="content-considepanel">
                 <Tippy content="Đổi ảnh đại diện" placement="left" zIndex={16000}>
                     <div className="avatar-wrap">
