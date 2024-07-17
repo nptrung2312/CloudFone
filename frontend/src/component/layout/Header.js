@@ -23,7 +23,7 @@ function Header() {
     const avatar = useSelector((state) => state.user.avatar);
     const firstName = useSelector((state) => state.user.user.firstName);
     const lastName = useSelector((state) => state.user.user.lastName);
-    const position = useSelector((state) => state.user.user.position);
+    const policy = useSelector((state) => state.user.user.account.policy);
     const statusPanel = useSelector((state) => state.user.statusContentSidePanel);
     const user = useSelector((state) => state.user.user);
     //handle date
@@ -111,11 +111,11 @@ function Header() {
 
     let defaultAvatar = require('./images/user.jpg');
     let defaultFullName = "Tên người dùng";
-    let defaultPosition = "Chức vụ";
+    let defaultPolicy = "Chức vụ";
     if (dataUser) {
         defaultAvatar = dataUser.image ?? dataUser.image;
         defaultFullName = `${dataUser.firstName} ${dataUser.lastName}`;
-        defaultPosition = dataUser.positionId ?? dataUser.positionId;
+        defaultPolicy = dataUser.account['policy'] ?? dataUser.account['policy'];
     }
     return (
         <header>
@@ -146,7 +146,7 @@ function Header() {
                         <img className='img-user' src={avatar || defaultAvatar} alt='avatar-user' />
                     </div>
                     <div className='info'>
-                        <span className='position'>{position || defaultPosition}</span>
+                        <span className='position'>{policy || defaultPolicy}</span>
                         <span className='name'>{(firstName + " " + lastName) || defaultFullName}</span>
                     </div>
                 </div>

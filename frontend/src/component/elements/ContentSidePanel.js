@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUser, updateStatusContentSidePanel } from '../../redux/userSlice';
+import { updateUser, updateStatusContentSidePanel, fetchUser } from '../../redux/userSlice';
 import { SuccessIcon, ErrorIcon } from '../elements/ToastIcon';
 import ChangeImage from "./ChangeImage";
 import ChangePassword from "./ChangePassword";
@@ -24,21 +24,21 @@ function ContentSidePanel({ userDataChild }) {
     const inputRefs = {
         lastName: useRef(null),
         firstName: useRef(null),
-        position: useRef(null),
+        policy: useRef(null),
         company: useRef(null),
         email: useRef(null),
         phone: useRef(null),
         address: useRef(null),
     };
-
     const [userData, setUserData] = useState({
-        id: userDataChild["id"],
+        accountId: userDataChild.account["accountId"],
+        userId: userDataChild["userId"],
         lastName: userDataChild["lastName"],
         firstName: userDataChild["firstName"],
-        position: userDataChild["positionId"],
-        company: userDataChild["roleId"],
+        policy: userDataChild.account['policy'],
+        company: userDataChild["companyId"],
         email: userDataChild["email"],
-        phone: userDataChild["phoneNumber"],
+        phone: userDataChild["phone"],
         address: userDataChild["address"]
     });
 
@@ -73,33 +73,51 @@ function ContentSidePanel({ userDataChild }) {
             .then(res => {
                 if (res.data.errCode === 0) {
                     const infoAfter = res.data;
+
                     setUserData(prevState => ({
                         ...prevState,
-                        id: infoAfter.user["id"],
+                        accountId: infoAfter.user["account.accountId"],
+                        userId: infoAfter.user["userId"],
                         lastName: infoAfter.user["lastName"],
                         firstName: infoAfter.user["firstName"],
-                        position: infoAfter.user["positionId"],
-                        company: infoAfter.user["roleId"],
+                        company: infoAfter.user["companyId"],
                         email: infoAfter.user["email"],
-                        phone: infoAfter.user["phonenumber"],
-                        address: infoAfter.user["address"]
+                        phone: infoAfter.user["phone"],
+                        address: infoAfter.user["address"],
+                        policy: infoAfter.user["account.policy"],
                     }))
+
+                    setStaticMode(true);
+                    dispatch(updateStatusContentSidePanel(false));
+                    dispatch(fetchUser(userData));
                     dispatch(updateUser({
                         firstName: infoAfter.user.firstName,
                         lastName: infoAfter.user.lastName,
-                        position: infoAfter.user.positionId
+                        account: {
+                            policy: infoAfter.user['account.policy']
+                        }
                     }));
-                    dispatch(updateStatusContentSidePanel(false));
-                    setStaticMode(true);
+
                     toast.success("Cập nhật thông tin thành công!", { icon: <SuccessIcon /> });
                 } else {
                     toast.error("Đã xảy ra lỗi!", { icon: <ErrorIcon /> });
                 }
+
             })
-            .catch(() => {
-                toast.error("Đã xảy ra lỗi trong quá trình gửi yêu cầu!", { icon: <ErrorIcon /> });
+            .catch((error) => {
+                if (error.response) {
+                    // Request được gửi đi và server trả về lỗi status code
+                    toast.error(`Đã xảy ra lỗi từ server: ${error.response.status}`, { icon: <ErrorIcon /> });
+                } else if (error.request) {
+                    // Request được gửi đi nhưng không nhận được phản hồi
+                    toast.error('Không nhận được phản hồi từ server!', { icon: <ErrorIcon /> });
+                } else {
+                    // Lỗi xảy ra khi thiết lập request
+                    toast.error('Đã xảy ra lỗi khi gửi yêu cầu!', { icon: <ErrorIcon /> });
+                }
             })
     };
+
     //-------------------------------------------
     return (
         <div className="main-considepanel-wrapper">
@@ -107,15 +125,15 @@ function ContentSidePanel({ userDataChild }) {
             <div className="content-considepanel">
                 <Tippy content="Đổi ảnh đại diện" placement="left" zIndex={16000}>
                     <div className="avatar-wrap">
-                        <ChangeImage idUser={session.user["id"]} avatarUser={userDataChild["image"]} />
+                        <ChangeImage idUser={session.user["userId"]} avatarUser={userDataChild["image"]} />
                     </div>
                 </Tippy>
                 <div className="info-user">
                     <h3 className="title-info">Thông tin liên hệ</h3>
                     <div className="info">
                         <form onSubmit={handleSubmit}>
-                            <input type="number" name="id" defaultValue={session.user["id"]} hidden />
-                            {/* <InputForm label="Tên" name="lastName" fieldName="lastName" initialValue={userData.lastName} value={userData.lastName} onChange={handleInputChange} /> */}
+                            <input type="number" name="id" defaultValue={session.user["userId"]} hidden />
+
                             <div className="form-group">
                                 <label>Tên</label>
                                 <input
@@ -132,7 +150,7 @@ function ContentSidePanel({ userDataChild }) {
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Họ" fieldName="firstName" initialValue={userData.firstName} value={userData.firstName} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Họ</label>
                                 <input
@@ -149,24 +167,24 @@ function ContentSidePanel({ userDataChild }) {
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Chức vụ" fieldName="position" initialValue={userData.position} value={userData.position} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Chức vụ</label>
                                 <input
                                     type="text"
-                                    defaultValue={userData.position}
+                                    defaultValue={userData.policy}
                                     className={`input-text ${staticMode ? '' : 'input-public'}`}
-                                    id="position"
-                                    name="position"
+                                    id="policy"
+                                    name="policy"
                                     readOnly={staticMode}
                                     onChange={handleInputChange}
-                                    ref={inputRefs.position} // Đặt ref vào input
+                                    ref={inputRefs.policy} // Đặt ref vào input
                                 />
-                                <span className="edit-input" onClick={() => handleEditClick("position")}>
+                                <span className="edit-input" onClick={() => handleEditClick("policy")}>
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Đơn vị" fieldName="company" initialValue={userData.company} value={userData.company} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Đơn vị</label>
                                 <input
@@ -183,7 +201,7 @@ function ContentSidePanel({ userDataChild }) {
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Email" fieldName="email" initialValue={userData.email} value={userData.email} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Email</label>
                                 <input
@@ -200,7 +218,7 @@ function ContentSidePanel({ userDataChild }) {
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Số điện thoại" fieldName="phone" initialValue={userData.phone} value={userData.phone} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Số điện thoại</label>
                                 <input
@@ -217,7 +235,7 @@ function ContentSidePanel({ userDataChild }) {
                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            {/* <InputForm label="Địa chỉ" fieldName="address" initialValue={userData.address} value={userData.address} onChange={handleInputChange} /> */}
+
                             <div className="form-group">
                                 <label>Địa chỉ</label>
                                 <input
@@ -239,11 +257,11 @@ function ContentSidePanel({ userDataChild }) {
                     </div>
                 </div>
                 <div className="info-login">
-                    <ChangePassword idUser={session.user["id"]} />
+                    <ChangePassword idAccount={userData.accountId} />
                 </div>
             </div>
         </div>
     );
 }
 
-export default ContentSidePanel;
+export default React.memo(ContentSidePanel);

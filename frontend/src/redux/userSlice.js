@@ -18,7 +18,7 @@ const initialState = {
     user: {
         firstName: '',  // Lưu tên của người dùng
         lastName: '',   // Lưu họ của người dùng
-        position: '',   // Lưu chức vụ của người dùng
+        account: { policy: '', }   // Lưu chức vụ của người dùng
     },  // Lưu thông tin người dùng
     avatar: '',
     loading: false, // Trạng thái tải dữ liệu
@@ -45,7 +45,7 @@ const userSlice = createSlice({
         updateUser(state, action) {
             state.user.firstName = action.payload.firstName;
             state.user.lastName = action.payload.lastName;
-            state.user.position = action.payload.position;
+            state.user.policy = action.payload.account.policy;
         },
         updateStatusContentSidePanel(state, action) {
             state.statusContentSidePanel = action.payload;
