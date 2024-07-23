@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import '../../assets/scss/Sidebar.scss';
+import config from '../../config';
 
 function Sidebar() {
     const [openMenu, setOpenMenu] = useState(true);
     const [openSubMenu, setOpenSubMenu] = useState(false);
     const Menu = [
-        { 'title': 'Nhân sự', 'icon': 'fa-address-card-o' },
+        { 'title': 'Bảng điều khiển', 'icon': 'fa fa-tachometer', 'path': config.routes.home },
+        { 'title': 'Nhân sự', 'icon': 'fa-address-card-o', 'path': config.routes.personnel },
         { 'title': 'Công việc', 'icon': 'fa-calendar-minus-o', 'subMenu': 'true', 'subMenuItem': [{ 'title': 'Công việc trọng tâm' }, { 'title': 'Công việc phát sinh' }, { 'title': 'Công việc khác' }] },
         { 'title': 'Khách hàng', 'icon': 'fa-users' },
         { 'title': 'Sản phẩm - Dịch vụ', 'icon': 'fa-cubes' },
@@ -30,13 +32,15 @@ function Sidebar() {
                     {Menu.map((item, index) => (
                         <React.Fragment key={index}>
                             <Tippy content={item.title} placement="right">
-                                <li key={index} className='menu-item'>
-                                    <span className='icon'><i className={`fa ${item.icon}`} aria-hidden="true"></i></span>
-                                    <span className={`text ${openMenu && "hidden"} duration-300`}>{item.title}</span>
+                                <Link key={index} to={item.path}>
+                                    <li key={index} className='menu-item'>
+                                        <span className='icon'><i className={`fa ${item.icon}`} aria-hidden="true"></i></span>
+                                        <span className={`text ${openMenu && "hidden"} duration-300`}>{item.title}</span>
 
-                                    {item.subMenu && !openMenu && (<p onClick={() => setOpenSubMenu(!openSubMenu)}><span className={`icon-sub-menu duration-300 ${openSubMenu && "rotate-180"}`} ><i className="fa fa-sort-desc" aria-hidden="true"></i></span></p>)}
+                                        {item.subMenu && !openMenu && (<p onClick={() => setOpenSubMenu(!openSubMenu)}><span className={`icon-sub-menu duration-300 ${openSubMenu && "rotate-180"}`} ><i className="fa fa-sort-desc" aria-hidden="true"></i></span></p>)}
 
-                                </li>
+                                    </li>
+                                </Link>
                             </Tippy>
                             {
                                 item.subMenu && openSubMenu && !openMenu && (

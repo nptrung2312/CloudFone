@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from './redux/slices/counterSlice';
+import { increment, decrement } from '../../../redux/slices/counterSlice';
 
 function Home() {
     const dispatch = useDispatch();

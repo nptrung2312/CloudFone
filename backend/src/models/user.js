@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       users.hasOne(models.accounts, { foreignKey: 'email' });
+      users.hasOne(models.partners, { foreignKey: 'userId' });
     }
   };
   users.init({
@@ -20,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false,
       primaryKey: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,

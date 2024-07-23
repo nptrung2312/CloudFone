@@ -1,0 +1,34 @@
+/* Tệp styles.scss */
+.datepicker-demo {
+    .p-calendar {
+        .p-inputtext {
+            background-color: #f0f0f0;
+            border-color: #007ad9;
+            color: #333;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .p-datepicker {
+            background-color: #fff;
+            border-color: #007ad9;
+
+            .p-datepicker-header {
+                background-color: #007ad9;
+                color: #fff;
+            }
+
+            .p-datepicker-today {
+                background-color: #007ad9;
+                color: #fff;
+            }
+
+            .p-datepicker-day {
+                &:hover {
+                    background-color: #007ad9;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

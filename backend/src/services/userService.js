@@ -96,7 +96,7 @@ let handleGetInfo = async (infoUser) => {
       user: user.get({ plain: true }),
     });
   } catch (e) {
-    consolog.log(e);
+    console.log(e);
   }
   // });
 }
@@ -229,4 +229,5 @@ module.exports = {
   handleUpdateInfoUser: handleUpdateInfoUser,
   handleUpdatePassUser: handleUpdatePassUser,
   handleUpdateAvatar: handleUpdateAvatar,
+  checkUserEmail: checkUserEmail
 };

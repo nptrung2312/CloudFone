@@ -1,0 +1,32 @@
+.add-item-wrap {
+    margin-top: 20px;
+
+    .form-group {
+        .input-text {
+            font-size: 16px;
+            border: 1px solid #c7c7c7;
+            border-radius: 4px;
+
+            &:hover {
+                transition: all .3s;
+                border-color: rgb(0, 213, 154);
+            }
+
+            &:focus {
+                border-color: rgb(0, 213, 154) !important;
+            }
+        }
+    }
+
+    .btn-submit {
+        color: #FFF;
+        border-radius: 4px;
+        padding: 4px 20px;
+        font-weight: 700;
+        background: rgb(0, 158, 179);
+
+        &:hover {
+            background: rgb(85, 208, 224);
+        }
+    }
+}

@@ -1,22 +1,18 @@
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import MasterLayout from './component/layout';
 import { publicRoutes, protectedRoutes } from './routes';
 import ProtectedRoute from './routes/ProtectedRoute';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [account, setAccount] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     let session = sessionStorage.getItem('account');
-    if (session) {
-      setAccount(prevAccount => session);
-      navigate('/home');
-    } else {
+    if (!session) {
       navigate('/');
     }
   }, [navigate]);
