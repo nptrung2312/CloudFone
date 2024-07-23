@@ -16,7 +16,8 @@ let handleGetWork = async (req, res) => {
     setTimeout(async () => {
         let listWork = await workService.handleGetWorkUser(req.body);
         return res.status(200).json({
-            message: listWork.errMessage ? listWork.errMessage : {},
+            errCode: listWork.errCode,
+            message: listWork.errMessage,
             work: listWork.list ? listWork.list : {},
         });
 

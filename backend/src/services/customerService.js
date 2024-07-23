@@ -52,35 +52,37 @@ let handleServiceAddCustomer = async (infoCustomer) => {
 let handleServiceGetCustomer = async (userId) => {
   try {
     let customerData = {};
-    let listCustomer = await db.partners.findAll({
-      where: { businessId1: userId.id },
-      order: [
-        ['partnerId', 'DESC']
-      ],
-      attributes: ["partnerId", "businessId1", "businessId2"],
-      raw: true,
-    });
-
-    if (listCustomer) {
-
-      const listDataPromises = listCustomer.map(async (customer) => {
-        let listInfo = await db.users.findOne({
-          where: { userId: customer.businessId2 },
-          order: [
-            ['userId', 'DESC']
-          ],
-          raw: true,
-        });
-        return listInfo;
+    if (userId && userId.id) {
+      let listCustomer = await db.partners.findAll({
+        where: { businessId1: userId.id },
+        order: [
+          ['partnerId', 'DESC']
+        ],
+        attributes: ["partnerId", "businessId1", "businessId2"],
+        raw: true,
       });
 
-      const listData = await Promise.all(listDataPromises);
-      customerData.errCode = 0;
-      customerData.errMessage = "Oke";
-      customerData.list = listData;
-    } else {
-      customerData.errCode = 2;
-      customerData.errMessage = "Không có dữ liệu!";
+      if (listCustomer) {
+
+        const listDataPromises = listCustomer.map(async (customer) => {
+          let listInfo = await db.users.findOne({
+            where: { userId: customer.businessId2 },
+            order: [
+              ['userId', 'DESC']
+            ],
+            raw: true,
+          });
+          return listInfo;
+        });
+
+        const listData = await Promise.all(listDataPromises);
+        customerData.errCode = 0;
+        customerData.errMessage = "Oke";
+        customerData.list = listData;
+      } else {
+        customerData.errCode = 2;
+        customerData.errMessage = "Không có dữ liệu!";
+      }
     }
     return customerData;
   } catch (e) {

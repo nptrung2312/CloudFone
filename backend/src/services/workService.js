@@ -34,33 +34,35 @@ let handleServiceAddWork = async (infoWork) => {
 
     return userData;
 
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.error('Có lỗi xảy ra:', error);
   }
 }
 
 let handleGetWorkUser = async (userId) => {
   try {
     let workData = {};
-    let workUser = await db.works.findAll({
-      where: { userId: userId.id },
-      order: [
-        ['workId', 'DESC']
-      ],
-      raw: true,
-    });
+    if (userId && userId.id) {
+      let workUser = await db.works.findAll({
+        where: { userId: userId.id },
+        order: [
+          ['workId', 'DESC']
+        ],
+        raw: true,
+      });
 
-    if (workUser) {
-      workData.errCode = 0;
-      workData.errMessage = "Oke";
-      workData.list = workUser;
-    } else {
-      workData.errCode = 2;
-      workData.errMessage = "Không có dữ liệu!";
+      if (workUser) {
+        workData.errCode = 0;
+        workData.errMessage = "Oke";
+        workData.list = workUser;
+      } else {
+        workData.errCode = 2;
+        workData.errMessage = "Không có dữ liệu!";
+      }
     }
     return workData;
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.error('Có lỗi xảy ra:', error);
   }
 }
 
