@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import 'tippy.js/dist/tippy.css';
 import AddNewItem from "./AddNewItem";
 import { fetchWork, updateStatusBoxAddItem } from "../../../redux/workSlice";
+import formatDate from "../../elements/formatDate";
 
 function WorkElement({ userId }) {
 
@@ -109,7 +110,7 @@ function WorkElement({ userId }) {
                                     itemsWorkBox.map((item, index) => (
                                         <div key={index} className="item-box work-box">
                                             <div className="title-box"><span><i className="fa fa-circle" aria-hidden="true"></i></span> {item.workName}</div>
-                                            <div className="time-box"><span><i className="fa fa-calendar" aria-hidden="true"></i></span>&nbsp; {item.startDate} - {item.endDate}</div>
+                                            <div className="time-box"><span><i className="fa fa-calendar" aria-hidden="true"></i></span>&nbsp; {formatDate(item.startDate)} - {formatDate(item.endDate)}</div>
                                             <div className="desc-box">-&nbsp; {item.workDetail}</div>
                                         </div>
                                     ))

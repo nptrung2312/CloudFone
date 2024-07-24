@@ -110,7 +110,7 @@ function Header() {
     }, []);
 
     let defaultAvatar = require('./images/user.jpg');
-    let defaultFullName = "Tên người dùng";
+    let defaultFullName = "Administrator";
     let defaultPolicy = "Chức vụ";
     if (dataUser) {
         defaultAvatar = dataUser.image ?? dataUser.image;
