@@ -25,6 +25,40 @@
     }
 }
 
+#pr_id_3 {
+    position: relative;
+    padding: 40px 30px 30px 30px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 5px 15px 100px 40px rgba(0, 0, 0, 0.5);
+
+    .p-dialog-header-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .p-confirm-dialog-message {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .p-dialog-footer {
+        button {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 15px;
+        }
+
+        .p-confirm-dialog-reject {
+            color: rgb(141, 5, 5);
+        }
+
+        .p-confirm-dialog-accept {
+            color: rgb(4, 138, 4);
+        }
+    }
+}
+
 //Scrollbar CSS
 html *::-webkit-scrollbar {
     border-radius: 100px;

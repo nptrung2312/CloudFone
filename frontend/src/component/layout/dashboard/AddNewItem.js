@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from 'react-redux';
 import { fetchWork, updateStatusBoxAddItem } from '../../../redux/workSlice';
 import { fetchCustomer, updateStatusBoxAddItem as updateStatusCustomer } from '../../../redux/customerSlice';
+import { fetchNote, updateStatusBoxAddItem as updateStatusNote } from '../../../redux/noteSlice';
 import { SuccessIcon, ErrorIcon } from '../../elements/ToastIcon';
 import 'tippy.js/dist/tippy.css';
 import './scss/AddNewItem.scss';
@@ -41,6 +42,10 @@ function AddNewItem({ id, api, name, item }) {
                     if (api === 'addCustomer') {
                         dispatch(updateStatusCustomer(true));
                         dispatch(fetchCustomer(id));
+                    }
+                    if (api === 'handleAddNote') {
+                        dispatch(updateStatusNote(true));
+                        dispatch(fetchNote(id));
                     }
                 } else {
                     toast.error(res.data.message, { icon: <ErrorIcon /> });

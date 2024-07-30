@@ -41,6 +41,7 @@ function App() {
         })}
       </Routes>
       <ToastContainer
+        position="top-center"
         className="toast-container"
         toastClassName="toast-item"
         bodyClassName="toast-item-body"

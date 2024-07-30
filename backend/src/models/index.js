@@ -32,6 +32,7 @@ db.users = require('./user')(sequelize, Sequelize.DataTypes);
 db.accounts = require('./account')(sequelize, Sequelize.DataTypes);
 db.works = require('./work')(sequelize, Sequelize.DataTypes);
 db.partners = require('./partner')(sequelize, Sequelize.DataTypes);
+db.notes = require('./note')(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

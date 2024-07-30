@@ -2,6 +2,7 @@ import express from "express";
 import homeController from "../controllers/homeController";
 import workController from "../controllers/workController";
 import customerController from "../controllers/customerController";
+import syntheticController from "../controllers/syntheticController";
 
 let router = express.Router();
 
@@ -16,6 +17,9 @@ let initWebRoutes = (app) => { //Tạo các route tại đây truyền ứng d�
     router.post('/api/getWorkUser', workController.handleGetWork);
     router.post('/api/addCustomer', customerController.handleAddCustomer);
     router.post('/api/getListCustomer', customerController.handleGetCustommer);
+    router.post('/api/handleAddNote', syntheticController.handleAddNote);
+    router.post('/api/handleDeleteNote', syntheticController.handleDeleteNote);
+    router.post('/api/getListNote', syntheticController.handleGetNote);
     router.post("/api/nptrung", (req, res) => {
         return res.send("NpTrung!");
     });

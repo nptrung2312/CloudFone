@@ -54,7 +54,7 @@ function WorkElement({ userId }) {
 
     return (
         <div className="home-col my-work-wrap">
-            <h2 className="title-col col-1">Công việc <span className="total">({itemsWorkBox.length})</span></h2>
+            <h2 className="title-col col-1">Công việc <span className="total">({itemsWorkBox.length || 0})</span></h2>
             <div className="content-col">
                 <Tippy content="Thêm nhanh" placement="right">
                     <button className="btn-add-item" onClick={() => handleAddNew(openFormAdd)}><i className="fa fa-plus" aria-hidden="true"></i></button>

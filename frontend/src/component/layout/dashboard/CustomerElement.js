@@ -50,7 +50,7 @@ function CustomerElement({ userId }) {
 
     return (
         <div className="home-col my-customer-wrap">
-            <h2 className="title-col col-2">Khách hàng <span className="total">({itemsCustomerBox.length})</span></h2>
+            <h2 className="title-col col-2">Khách hàng <span className="total">({itemsCustomerBox.length || 0})</span></h2>
             <div className="content-col">
                 <Tippy content="Thêm nhanh" placement="right">
                     <button className="btn-add-item" onClick={() => handleAddCustomer(openFormAddCustomer)}><i className="fa fa-plus" aria-hidden="true"></i></button>
