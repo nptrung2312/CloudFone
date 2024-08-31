@@ -6,6 +6,9 @@ import { fetchWork, updateStatusBoxAddItem } from '../../../redux/workSlice';
 import { fetchCustomer, updateStatusBoxAddItem as updateStatusCustomer } from '../../../redux/customerSlice';
 import { fetchNote, updateStatusBoxAddItem as updateStatusNote } from '../../../redux/noteSlice';
 import { SuccessIcon, ErrorIcon } from '../../elements/ToastIcon';
+import DatePicker from "react-multi-date-picker";
+import InputIcon from "react-multi-date-picker/components/input_icon";
+import { months, weekDays } from "../../elements/GlobalValiable";
 import 'tippy.js/dist/tippy.css';
 import './scss/AddNewItem.scss';
 // import '../../../assets/scss/InputDate.scss';
@@ -19,13 +22,28 @@ function AddNewItem({ id, api, name, item }) {
         return listInput.push(value)
     })
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
+    const handleInputChange = (event, name) => {
+        if (typeof event === 'object' && event.target) {
+            const { name, value } = event.target;
 
-        setItemData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+            setItemData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        } else {
+            // Handle DatePicker change
+            const date = new Date(event);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed in JS
+            const day = String(date.getDate()).padStart(2, '0');
+
+            const formattedDate = `${year}-${month}-${day}`;
+
+            setItemData(prevState => ({
+                ...prevState,
+                [name]: formattedDate
+            }));
+        }
     };
 
     const handleSubmitAddItem = (event) => {
@@ -88,7 +106,10 @@ function AddNewItem({ id, api, name, item }) {
                                         ))}
                                     </select>
                                     :
-                                    <input value={itemData[value.name] || ''} onChange={handleInputChange} type={value.type} name={value.name} className="input-text" placeholder={value.text} required={value.require} />
+                                    value.type === 'date' ?
+                                        <DatePicker inputClass="custom-input" value={itemData[value.name] || ''} onChange={(date) => handleInputChange(date, value.name)} format="YYYY-MM-DD" weekDays={weekDays} months={months} render={<InputIcon placeholder={value.text} name={value.name} />} />
+                                        :
+                                        <input value={itemData[value.name] || ''} onChange={handleInputChange} type={value.type} name={value.name} className="input-text" placeholder={value.text} required={value.require} />
                                 }
                             </div>
                         )

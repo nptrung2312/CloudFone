@@ -8,10 +8,11 @@ import config from '../../config';
 function Sidebar() {
     const [openMenu, setOpenMenu] = useState(true);
     const [openSubMenu, setOpenSubMenu] = useState(false);
+
     const Menu = [
         { 'title': 'Bảng điều khiển', 'icon': 'fa fa-tachometer', 'path': config.routes.home },
         { 'title': 'Nhân sự', 'icon': 'fa-address-card-o', 'path': config.routes.personnel },
-        { 'title': 'Công việc', 'icon': 'fa-calendar-minus-o', 'subMenu': 'true', 'subMenuItem': [{ 'title': 'Công việc trọng tâm' }, { 'title': 'Công việc phát sinh' }, { 'title': 'Công việc khác' }] },
+        { 'title': 'Công việc', 'icon': 'fa-calendar-minus-o', 'path': config.routes.works, 'subMenu': 'true', 'subMenuItem': [{ 'title': 'Công việc trọng tâm' }, { 'title': 'Công việc phát sinh' }, { 'title': 'Công việc khác' }] },
         { 'title': 'Khách hàng', 'icon': 'fa-users' },
         { 'title': 'Sản phẩm - Dịch vụ', 'icon': 'fa-cubes' },
         { 'title': 'Dự án', 'icon': 'fa-object-group' }

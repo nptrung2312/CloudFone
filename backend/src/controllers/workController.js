@@ -24,7 +24,17 @@ let handleGetWork = async (req, res) => {
     }, 1000);
 };
 
+let handleEditWork = async (req, res) => {
+    let listWork = await workService.handleModelEditWork(req.body);
+    return res.status(200).json({
+        errCode: listWork.errCode,
+        message: listWork.errMessage,
+        work: listWork.work ? listWork.work : {},
+    });
+};
+
 module.exports = {
     handleAddWork: handleAddWork,
     handleGetWork: handleGetWork,
+    handleEditWork: handleEditWork
 }

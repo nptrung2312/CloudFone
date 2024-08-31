@@ -21,6 +21,12 @@ module.exports = {
       typeOf: {
         type: Sequelize.INTEGER,
       },
+      workType: {
+        type: Sequelize.INTEGER,
+      },
+      status: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

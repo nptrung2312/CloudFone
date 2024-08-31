@@ -14,7 +14,7 @@ function NoteElement({ userId }) {
 
     const dispatch = useDispatch();
     const [openFormAdd, setOpenFormAdd] = useState(true);
-    const statusFormAdd = useSelector((state) => state.work.statusBoxAddItem);
+    const statusFormAdd = useSelector((state) => state.note.statusBoxAddItem);
     const itemsNoteBox = useSelector((state) => state.note.listNote);
     const isError = useSelector((state) => state.note.error);
     const isLoading = useSelector((state) => state.note.loading);

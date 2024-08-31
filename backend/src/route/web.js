@@ -15,6 +15,8 @@ let initWebRoutes = (app) => { //Tạo các route tại đây truyền ứng d�
     router.post('/api/saveImage', homeController.handleSaveImage);
     router.post('/api/handleAddWork', workController.handleAddWork);
     router.post('/api/getWorkUser', workController.handleGetWork);
+    router.post('/api/addWork', workController.handleAddWork);
+    router.post('/api/editWork', workController.handleEditWork);
     router.post('/api/addCustomer', customerController.handleAddCustomer);
     router.post('/api/getListCustomer', customerController.handleGetCustommer);
     router.post('/api/handleAddNote', syntheticController.handleAddNote);

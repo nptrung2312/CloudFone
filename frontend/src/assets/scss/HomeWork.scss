@@ -1,0 +1,246 @@
+.home-work-wrapper {
+    position: relative;
+    height: 100%;
+    margin: 0 10px;
+    padding: 20px;
+    color: #FFF;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+
+    .filter-tabs-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .filter-wrap {
+            display: flex;
+            align-items: center;
+
+            .icon-filter {
+                font-size: 20px;
+            }
+
+            .datepicker {
+                margin: 0 10px;
+
+                input {
+                    background: transparent;
+                    border-color: rgba(255, 255, 255, 0.8);
+                    padding: 5px 10px;
+                    height: unset;
+
+                    &:focus {
+                        border-color: rgba(255, 255, 255, 0.8) !important;
+                        box-shadow: unset;
+                    }
+
+                    &::placeholder {
+                        font-size: 13px;
+                        color: inherit;
+                    }
+                }
+            }
+
+            .multi-select {
+                align-items: center;
+                border-radius: 5px;
+                padding: 7px 10px;
+                border: 1px solid rgba(255, 255, 255, 0.8);
+
+                .p-multiselect-label-container {
+                    font-size: 14px;
+                }
+
+                .p-multiselect-trigger {
+                    margin-left: 10px;
+                }
+            }
+
+            .btn-add-work {
+                height: 38px;
+                width: 38px;
+                border-radius: 50%;
+                margin-left: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .tabs-view {
+            display: flex;
+            padding: 5px 10px;
+            border: 1px solid #FFF;
+            border-radius: 5px;
+            justify-content: space-between;
+
+            .button-tab {
+                border-radius: 4px;
+                background: rgba(255, 255, 255, 0.5);
+                padding: 0 10px;
+
+                &.p-button-outlined {
+                    background: none;
+                }
+            }
+        }
+    }
+
+    .content-tabs {
+        color: #FFF;
+
+        .p-accordion {
+            background: none;
+
+            .p-accordion-header-link {
+                color: #FFF;
+                font-weight: 700;
+                font-size: 15px;
+                text-align: left;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                padding: 10px 0;
+                margin-bottom: 5px;
+
+                .p-accordion-header-text {
+                    margin-left: 6px;
+                }
+            }
+        }
+
+        .list-info {
+            width: 100%;
+            color: #FFF;
+            font-size: 17px;
+
+            thead {
+                border-bottom: 1px solid rgba(255, 255, 255, .3);
+
+                th {
+                    padding: 10px 0;
+                }
+            }
+
+            tbody {
+
+                tr {
+                    &.tabs-rows {
+                        position: relative;
+
+                        &::after {
+                            content: '✎';
+                            position: absolute;
+                            bottom: 0;
+                            right: 10px;
+                            opacity: 0;
+                            font-size: 22px;
+                            transform: rotate(90deg);
+                        }
+
+                        &:hover {
+                            background: rgba(255, 255, 255, .3);
+                            cursor: pointer;
+
+
+                            &::after {
+                                transition: all .3s;
+                                bottom: 50%;
+                                transform: translateY(50%) rotate(90deg);
+                                opacity: 1;
+                            }
+                        }
+                    }
+
+                    td {
+                        padding: 10px 0;
+                        border-left: 1px dashed rgba(255, 255, 255, .2);
+                        border-right: 1px dashed rgba(255, 255, 255, .2);
+
+                        &.td-work-table {
+                            width: calc(100% / 6);
+                            vertical-align: top;
+                        }
+
+                        .date-present {
+                            font-weight: 700;
+                            color: #3af733;
+                        }
+
+                        .date-past {
+                            font-weight: 700;
+                            color: #ff2222;
+                        }
+
+                        .item-box {
+                            display: flex;
+                            align-items: center;
+                            background: rgba(255, 255, 255, 1);
+                            color: #414141;
+                            margin: 0 5px 10px 5px;
+                            padding: 10px;
+                            border-radius: 8px;
+                            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .09);
+                            cursor: pointer;
+
+                            .info-job {
+                                flex-basis: 28px;
+                                text-align: left;
+                                border-right: 2px solid;
+
+                                .assigned {
+                                    padding-left: 2px;
+                                    margin-bottom: 5px;
+                                    color: rgb(10 53 209);
+                                }
+                            }
+
+                            .name-job {
+                                flex-basis: calc(100% - 28px);
+                                padding: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.p-multiselect-panel {
+    left: 333px !important;
+    top: 135px !important;
+    border-radius: 5px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 1);
+
+    .p-multiselect-header {
+        .p-checkbox {
+            display: none;
+        }
+    }
+
+    .p-multiselect-item {
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        &.p-highlight {
+
+            .p-checkbox-icon,
+            span {
+                color: rgb(6, 116, 6);
+            }
+        }
+
+        span {
+            flex-basis: calc(100% - 20px);
+        }
+
+        .p-checkbox {
+            width: 15px;
+        }
+
+        .p-checkbox-input {
+            display: none;
+        }
+    }
+}

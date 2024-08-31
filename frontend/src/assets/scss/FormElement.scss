@@ -1,0 +1,109 @@
+.form-element-wrap {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    padding: 10px 50px;
+
+    .title-form-element {
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, .5);
+        margin-bottom: 20px;
+        flex-basis: 100%;
+    }
+
+    .form-group {
+        border-radius: 10px;
+        padding: 10px 0;
+        flex-basis: 100%;
+
+        &.form-group-radio,
+        &.form-group-date {
+            flex-basis: 49%;
+        }
+
+        svg {
+            right: 5px !important;
+        }
+
+        .input-text,
+        .rmdp-input {
+            border: 1px solid rgba(255, 255, 255, .5);
+            border-radius: 5px;
+            background: inherit;
+
+            &:focus {
+                border-color: rgba(255, 255, 255, .5) !important;
+            }
+        }
+
+        &.form-group-radio {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .input-radio {
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+            }
+
+            label {
+                font-size: 16px;
+                cursor: pointer;
+            }
+        }
+
+        select {
+            option {
+                color: #000;
+            }
+        }
+    }
+
+    .btn-wrap {
+        flex-basis: 100%;
+        text-align: center;
+        margin-top: 30px;
+
+        .btn-submit {
+            color: #fff;
+            font-weight: 700;
+            padding: 5px 40px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            border: 2px solid rgba(255, 255, 255, 1);
+
+            &:hover {
+                transition: all .3s;
+                color: #3af733;
+                border-color: rgba(59, 241, 53, 1);
+            }
+        }
+    }
+}
+
+.p-dropdown-panel {
+    left: 1010px !important;
+    min-width: 860px !important;
+    z-index: 15001 !important;
+    background: rgba(255, 255, 255, .9);
+    border-radius: 0 0 8px 8px;
+
+    .p-dropdown-items {
+        .p-dropdown-item {
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 600;
+
+            &:hover {
+                transition: all .5s;
+                color: #1760fc;
+            }
+        }
+    }
+}

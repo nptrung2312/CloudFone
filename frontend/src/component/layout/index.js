@@ -13,7 +13,7 @@ function MasterLayout({ children }) {
                 <Header />
                 <div className="content-area flex">
                     <Sidebar />
-                    <main className='flex-1'>{children}</main>
+                    <main className='flex-1 flex-grow transition-all duration-300 overflow-auto'>{children}</main>
                 </div>
                 <Footer />
             </div>

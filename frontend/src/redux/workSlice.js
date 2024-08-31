@@ -13,9 +13,19 @@ export const fetchWork = createAsyncThunk(
         return response.data;  // Trả về dữ liệu người dùng từ server
     }
 );
+
+export const fetchWorkDemo = createAsyncThunk(
+    'work/fetchWorkDemo',
+    async (data) => {
+        return data;
+    }
+);
 // Trạng thái khởi tạo cho slice của bộ đếm
 const initialState = {
     listWork: {},
+    listWorkDemo: {},
+    error: null,
+    statusSlidingPanel: false,
     statusBoxAddItem: true,  // Giá trị ban đầu của bộ đếm
 }
 
@@ -28,13 +38,19 @@ export const workSlide = createSlice({
         setWork(state, action) {
             state.statusBoxAddItem = action.payload.statusBoxAddItem;
             state.listWork = action.payload.work;
+            state.listWorkDemo = action.payload;
+            state.statusSlidingPanel = action.payload.statusSlidingPanel;
         },
         updateStatusBoxAddItem(state, action) {
             state.statusBoxAddItem = action.payload;
+        },
+        updateStatusSlidingPanel(state, action) {
+            state.statusSlidingPanel = action.payload;
         }
     },
     extraReducers: (builder) => {
         builder
+            //fetchWork
             .addCase(fetchWork.pending, (state) => { // đang gọi API
                 state.loading = true;  // Đặt trạng thái tải dữ liệu
                 state.error = null;    // Xóa lỗi nếu có
@@ -46,12 +62,25 @@ export const workSlide = createSlice({
             .addCase(fetchWork.rejected, (state, action) => { // gọi API bị lỗi
                 state.loading = false;  // Tắt trạng thái tải dữ liệu
                 state.error = action.error.message;  // Lưu lỗi nếu có
+            })
+            //fetchWorkDemo
+            .addCase(fetchWorkDemo.pending, (state) => { // đang gọi API
+                state.loading = true;  // Đặt trạng thái tải dữ liệu
+                state.error = null;    // Xóa lỗi nếu có
+            })
+            .addCase(fetchWorkDemo.fulfilled, (state, action) => { // gọi API thành công
+                state.loading = false;  // Tắt trạng thái tải dữ liệu
+                state.listWorkDemo = action.payload;
+            })
+            .addCase(fetchWorkDemo.rejected, (state, action) => { // gọi API bị lỗi
+                state.loading = false;  // Tắt trạng thái tải dữ liệu
+                state.error = action.error.message;  // Lưu lỗi nếu có
             });
     }
 })
 
 // Các action creators được tạo tự động cho mỗi hàm reducer
-export const { setWork, updateStatusBoxAddItem } = workSlide.actions
+export const { setWork, updateStatusBoxAddItem, updateStatusSlidingPanel } = workSlide.actions
 
 // Xuất reducer để sử dụng trong store
 export default workSlide.reducer

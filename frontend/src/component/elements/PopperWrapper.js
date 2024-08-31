@@ -9,7 +9,7 @@ const PopperWrapper = ({ referenceElement, children, placement = 'bottom-start' 
     });
 
     return (
-        <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+        <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 50 }} {...attributes.popper}>
             {children}
         </div>
     );

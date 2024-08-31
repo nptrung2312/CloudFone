@@ -169,6 +169,7 @@ function Header() {
                 type={'right'}
                 isOpen={openPanel}
                 size={50}
+                zIndex={50}
                 hideBackdrop={true} // Hiển thị backdrop
                 backdropClicked={() => setOpenPanel(false)}
             >

@@ -71,14 +71,12 @@ class Login extends Component {
 							</span>
 
 							<div className="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
-								{/* <span class="label-input100">Tài khoản</span> */}
 								<input onChange={handleInput} className="input100" type="email" name="email" placeholder="Email của bạn" />
 								{this.state.errors.email && <span className='text-error'>{this.state.errors.email}</span>}
 								<span className="focus-input100" data-symbol="&#xf206;"></span>
 							</div>
 
 							<div className="wrap-input100 validate-input" data-validate="Password is required">
-								{/* <span class="label-input100">Mật khẩu</span> */}
 								<input onChange={handleInput} className="input100" type={this.state.isHidePassword ? 'password' : 'text'} name="password" placeholder="Mật khẩu của bạn" />
 								{this.state.errors.password && <span className='text-error'>{this.state.errors.password}</span>}
 								<span className="focus-input100" data-symbol="&#xf190;"></span>
@@ -103,7 +101,7 @@ class Login extends Component {
 						</form>
 					</div>
 					<div className='login-content-right'>
-						<img src={bgLogin} className='bg-image' />
+						<img src={bgLogin} className='bg-image' alt='' />
 					</div>
 				</div>
 			</div>

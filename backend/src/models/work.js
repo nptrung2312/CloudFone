@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      works.belongsTo(models.users, { foreignKey: 'userId', targetKey: 'userId' });
     }
   };
   works.init({
@@ -20,12 +21,18 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
-    userId: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true,
+      allowNull: false,
+    },
     workName: DataTypes.STRING,
     workDetail: DataTypes.STRING,
     startDate: DataTypes.STRING,
     endDate: DataTypes.STRING,
     typeOf: DataTypes.INTEGER,
+    workType: DataTypes.INTEGER,
+    status: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'works',

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import 'tippy.js/dist/tippy.css';
 import AddNewItem from "./AddNewItem";
 import { fetchWork, updateStatusBoxAddItem } from "../../../redux/workSlice";
-import formatDate from "../../elements/formatDate";
+import { formatDate } from "../../elements/formatDate";
 
 function WorkElement({ userId }) {
 
@@ -83,7 +83,7 @@ function WorkElement({ userId }) {
                                             }, {
                                                 'type': 'date',
                                                 'name': 'endDate',
-                                                'text': 'Ngày bắt đầu',
+                                                'text': 'Ngày kết thúc',
                                                 'require': 'required'
                                             }, {
                                                 'type': 'select',
